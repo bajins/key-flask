@@ -1,5 +1,5 @@
 # xshell-key-flask
-xshell激活key的web服务适用Flask框架
+xshell激活key的web服务使用Flask框架
 
 ## 使用
 ```bash
