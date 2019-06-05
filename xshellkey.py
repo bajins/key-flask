@@ -160,50 +160,50 @@ ProductPublishList = (
 )
 
 
-def GetChecksum(preProductKey: str):
-    Checksum = 1
-    for i in range(0, len(preProductKey)):
-        if preProductKey[i] != '-' and preProductKey[i] != '8' and preProductKey[i] != '9':
-            place = int(preProductKey[i])
-            Checksum = (9 - place) * Checksum % -1000
-    Checksum = (Checksum + int(preProductKey[9])) % 1000
-    return Checksum
+def get_check_sum(pre_product_key: str):
+    check_sum = 1
+    for i in range(0, len(pre_product_key)):
+        if pre_product_key[i] != '-' and pre_product_key[i] != '8' and pre_product_key[i] != '9':
+            place = int(pre_product_key[i])
+            check_sum = (9 - place) * check_sum % -1000
+    check_sum = (check_sum + int(pre_product_key[9])) % 1000
+    return check_sum
 
 
-def GenerateProductKey(IssueDate: datetime.date,
-                       ProductName: str,
-                       ProductVersion: int,
-                       NumberOfLicense: int):
-    if IssueDate.year < 2002:
+def generate_product_key(issue_date: datetime.date,
+                         product_name: str,
+                         product_version: int,
+                         number_license: int):
+    if issue_date.year < 2002:
         raise ValueError('IssueDate cannot be earlier than 2002.')
-    if IssueDate > datetime.date.today() + datetime.timedelta(days=7):
+    if issue_date > datetime.date.today() + datetime.timedelta(days=7):
         raise ValueError('IssueDate cannot be later than today after a week.')
-    if NumberOfLicense < 0 or NumberOfLicense > 999:
+    if number_license < 0 or number_license > 999:
         raise ValueError('NumberOfLicense must vary from 0 to 999.')
 
     for item in ProductPublishList:
-        if item['ProductName'] == ProductName and item['Version'] == ProductVersion:
-            if item['PublishDate'] > IssueDate:
+        if item['ProductName'] == product_name and item['Version'] == product_version:
+            if item['PublishDate'] > issue_date:
                 raise ValueError('IssueDate cannot be earlier than the publish date.')
             break
         # if item['ProductName'] == ProductName and str(item['Version']) != ProductVersion:
         #     raise ValueError('Invalid product.')
 
-    preProductKey = '%02d%02d%02d-%02d%d%03d-%03d' % (IssueDate.year - 2000,
-                                                      IssueDate.month,
-                                                      IssueDate.day,
-                                                      0x0B,
-                                                      ProductCode[ProductName],
-                                                      random.randint(0, 999),
-                                                      NumberOfLicense)
-    Checksum = GetChecksum(preProductKey)
-    ProductKey = preProductKey + '%03d' % Checksum
-    return ProductKey
+    pre_product_key = '%02d%02d%02d-%02d%d%03d-%03d' % (issue_date.year - 2000,
+                                                        issue_date.month,
+                                                        issue_date.day,
+                                                        0x0B,
+                                                        ProductCode[product_name],
+                                                        random.randint(0, 999),
+                                                        number_license)
+    check_sum = get_check_sum(pre_product_key)
+    product_key = pre_product_key + '%03d' % check_sum
+    return product_key
 
 
-def generateKey(ProductName: str, ProductVersion: int):
-    return GenerateProductKey(
+def generate_key(product_name: str, product_version: int):
+    return generate_product_key(
         datetime.date(datetime.datetime.now().year,
                       datetime.datetime.now().month,
-                      datetime.datetime.now().day), ProductName,
-        ProductVersion, 999)
+                      datetime.datetime.now().day), product_name,
+        product_version, 999)
