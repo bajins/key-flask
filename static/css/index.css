@@ -1047,7 +1047,8 @@ tbody tr:nth-child(odd) {
     padding-right: 1em;
     max-width: 768px;
     /* overflow-y: auto; */
-    flex: 1 0 auto;
+    /*flex: 1 0 auto;*/
+    flex: 1;
 }
 
 .content .content-subhead {
@@ -1077,7 +1078,7 @@ tbody tr:nth-child(odd) {
     display: block;
     height: 100%;
     width: 20px;
-    background: transparent url('/img/link-icon.png') no-repeat center center;
+    /*background: transparent url('/img/link-icon.png') no-repeat center center;*/
     background-size: 20px 20px
 }
 
@@ -1088,7 +1089,7 @@ tbody tr:nth-child(odd) {
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 2dppx) {
     .content-link {
-        background-image: url('/img/link-icon@2x.png')
+        /*background-image: url('/img/link-icon@2x.png')*/
     }
 }
 
@@ -1142,7 +1143,9 @@ code {
     width: 100%; */
     /*始终距离它的父元素的底部为0px.则是处于父元素的最底*/
     /* bottom: 0; */
-    flex: 0 0 auto;
+    /*flex: 0 0 auto;*/
+    flex: 0;
+    margin-top: 50px;
 }
 
 .legal {
@@ -1587,11 +1590,16 @@ pre .support.value {
     font-size: 125%;
 }
 
-.tip-top{
+.tip-top {
 
 }
-.tip-content{
+
+.tip-content {
     position: absolute;
     left: 50%;
     top: 50%;
+}
+
+.submit-button {
+    margin-top: 20px;
 }
