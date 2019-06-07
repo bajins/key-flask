@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="/static/css/index.css">
 
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/layer/layer.js"></script>
+    <script type="text/javascript" src="/static/js/layer/layer.js"></script>
     <script type="text/javascript" src="/static/js/device.js"></script>
+    <script type="text/javascript" src="/static/js/util.js"></script>
     <script type="text/javascript" src="/static/js/index.js"></script>
     {#  flask加载静态文件语法  #}
     {#    <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">#}
@@ -54,23 +55,30 @@
         </p>
         <form class="pure-form pure-form-stacked">
             <fieldset>
+                <label for="company"><b>公司:</b></label>
+                <select class="pure-input-1" id="company" onchange="selectCompany()">
+                    <option value="netsarang" selected>Netsarang</option>
+                    <option value="mobatek">Mobatek</option>
+                    <option value="torchsoft">torchsoft</option>
+                </select>
                 <label for="app"><b>产品:</b></label>
-                <select class="pure-input-1" id="app" name="pName">
+                <select class="pure-input-1" id="app">
                     <option value="Xmanager Power Suite">Xmanager Power Suite</option>
                     <option value="Xshell">Xshell</option>
                     <option value="Xlpd">Xlpd</option>
                     <option value="Xftp">Xftp</option>
                     <option value="Xshell Plus" selected>Xshell Plus</option>
                 </select>
-                <label for="version"><b>版本:</b></label>
-                <select class="pure-input-1" id="version" name="pVersion">
+                <label for="version"><b id="version-label">版本:</b></label>
+                <select class="pure-input-1" id="version">
                     <option value="6" selected>6</option>
                     <option value="5">5</option>
                     <option value="4">4</option>
                     <option value="3">3</option>
                     <option value="2">2</option>
                 </select>
-                <a class="pure-button pure-button-primary pure-input-1 pure-input-rounded" onclick="getKey()">
+                <a class="pure-button pure-button-primary pure-input-1 pure-input-rounded submit-button"
+                   onclick="getKey()">
                     点击获取秘钥
                 </a>
             </fieldset>
