@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask import Flask, make_response, send_from_directory
 # 模板模块
 from flask import render_template
