@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
-def hello_world():
+def index():
     return render_template('index.html')
 
 
