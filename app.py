@@ -65,6 +65,13 @@ def get_key():
     return jsonify({'code': 200, 'msg': "请求成功", 'key': key})
 
 
+def argvs():
+    if len(sys.argv) < 2:
+        return 5000
+    # return string.atoi(sys.argv[1])
+    return int(sys.argv[1])
+
+
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    app.run(port=argvs())
+    
