@@ -185,7 +185,7 @@ const isEmpty = ($obj) => {
         return true;
     }
     if (typeof $obj === "string") {
-        $obj = $obj.replace(/\s*/g, ""); //移除字符串中所有 ''
+        $obj = $obj.trim().replace(/\s*/g, ""); //移除字符串中所有 ''
         if ($obj === '') {
             return true;
         }
@@ -218,4 +218,57 @@ const replace = (str, substring, newString, isAll) => {
         return str.replace(new RegExp(substring, "g"), newString);
     }
     return str.replace(new RegExp(substring, ""), newString);
+}
+
+/**
+ * 正则表达式去除空行
+ *
+ * @param oldStr 字符串
+ * @return
+ * @Description
+ * @author claer woytu.com
+ * @date 2019/6/13 17:55
+ */
+function replaceBlank(oldStr) {
+    if (typeof oldStr != "string") {
+        console.log("正则表达式去除空行，传入的不为字符串！");
+    } else {
+        // 匹配空行
+        let reg = /\n(\n)*( )*(\n)*\n/g;
+        return oldStr.replace(reg, "\n");
+    }
+}
+
+/**
+ * splice方法删除数组中的空值
+ *
+ * @param array
+ * @return
+ * @Description
+ * @author claer woytu.com
+ * @date 2019/6/13 18:14
+ */
+function trimSpace(array) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == " " || array[i] == null || typeof (array[i]) == "undefined") {
+            array.splice(i, 1);
+            i = i - 1;
+        }
+    }
+    return array;
+}
+
+/**
+ * filter 过滤方法删除数组中的空值
+ *
+ * @param array
+ * @return
+ * @Description
+ * @author claer woytu.com
+ * @date 2019/6/13 18:14
+ */
+function trimFilter(array) {
+    array.filter(function (s) {
+        return s && s.trim(); // 注：IE9(不包含IE9)以下的版本没有trim()方法
+    });
 }
