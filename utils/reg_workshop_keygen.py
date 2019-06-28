@@ -98,3 +98,8 @@ def GenLicenseCode(name: str, license_count: int):
     padded_msg = PKCS1_Padding(msg, True, (n.bit_length() + 7) // 8)
     enc_msg = RSA_Encrypt(padded_msg, d, n)
     return enc_msg.hex()
+
+
+if __name__ == '__main__':
+    msg = GenLicenseCode("woytu", int(sys.argv[1]))
+    print(msg)

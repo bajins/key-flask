@@ -1,4 +1,5 @@
 import os, sys, zipfile
+from os import path
 
 VariantBase64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
 VariantBase64Dict = {i: VariantBase64Table[i] for i in range(len(VariantBase64Table))}
@@ -84,7 +85,7 @@ class LicenseType:
     Persional = 4
 
 
-def GenerateLicense(Type: LicenseType, Count: int, UserName: str, MajorVersion: int, MinorVersion):
+def GenerateLicense(Path: str, Type: LicenseType, Count: int, UserName: str, MajorVersion: int, MinorVersion):
     assert (Count >= 0)
     LicenseString = '%d#%s|%d%d#%d#%d3%d6%d#%d#%d#%d#' % (Type,
                                                           UserName, MajorVersion, MinorVersion,
@@ -95,5 +96,11 @@ def GenerateLicense(Type: LicenseType, Count: int, UserName: str, MajorVersion: 
                                                           # No Games flag. 0 means "NoGames = false". But it does not work.
                                                           0)  # No Plugins flag. 0 means "NoPlugins = false". But it does not work.
     EncodedLicenseString = VariantBase64Encode(EncryptBytes(0x787, LicenseString.encode())).decode()
-    with zipfile.ZipFile('static/public/Custom.mxtpro', 'w') as f:
+    with zipfile.ZipFile(Path + '/Custom.mxtpro', 'w') as f:
         f.writestr('Pro.key', data=EncodedLicenseString)
+
+
+if __name__ == '__main__':
+    MajorVersion, MinorVersion = sys.argv[2].split('.')[0:2]
+    GenerateLicense(sys.argv[1], LicenseType.Professional, 1, "woytu", int(MajorVersion), int(MinorVersion))
+    print(sys.argv)

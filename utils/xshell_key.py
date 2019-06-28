@@ -1,5 +1,6 @@
 import datetime
 import random
+import sys
 
 ProductCode = {
     'Xmanager': 0,
@@ -207,3 +208,8 @@ def generate_key(product_name: str, product_version: int):
                       datetime.datetime.now().month,
                       datetime.datetime.now().day), product_name,
         product_version, 999)
+
+
+if __name__ == '__main__':
+    msg = generate_key(sys.argv[1], int(sys.argv[2]))
+    print(sys.argv)
