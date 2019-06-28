@@ -103,4 +103,3 @@ def GenerateLicense(Path: str, Type: LicenseType, Count: int, UserName: str, Maj
 if __name__ == '__main__':
     MajorVersion, MinorVersion = sys.argv[2].split('.')[0:2]
     GenerateLicense(sys.argv[1], LicenseType.Professional, 1, "woytu", int(MajorVersion), int(MinorVersion))
-    print(sys.argv)

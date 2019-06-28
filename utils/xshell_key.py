@@ -212,4 +212,4 @@ def generate_key(product_name: str, product_version: int):
 
 if __name__ == '__main__':
     msg = generate_key(sys.argv[1], int(sys.argv[2]))
-    print(sys.argv)
+    print(msg)
