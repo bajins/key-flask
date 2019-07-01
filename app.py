@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+import os
 import sys
 
-from flask import Flask, make_response, send_from_directory
+from flask import Flask, make_response, send_from_directory, url_for
 # 模板模块
 from flask import render_template
 # json数据转换模块
@@ -14,12 +15,31 @@ from utils.content_type import judge_type
 from utils.moba_xterm_Keygen import GenerateLicense, LicenseType
 from utils.reg_workshop_keygen import GenLicenseCode
 from utils.xshell_key import generate_key  # 指定导入包下的函数
+from datetime import timedelta
 
 app = Flask(__name__)
+# 配置缓存最大时间
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = timedelta(seconds=1)
 
 
 # 自定义静态文件目录
 # app = Flask(__name__ ,static_folder='/tmp')
+
+# 清理浏览器缓存
+# 设置浏览器不缓存
+#  app_context_processor在flask中被称作上下文处理器
+# @app.context_processor
+# def override_url_for():
+#     return dict(url_for=dated_url_for)
+#
+#
+# def dated_url_for(endpoint, **values):
+#     if endpoint == 'static':
+#         filename = values.get('filename', None)
+#     if filename:
+#         file_path = os.path.join(app.root_path, endpoint, filename)
+#         values['q'] = int(os.stat(file_path).st_mtime)
+#         return url_for(endpoint, **values)
 
 
 @app.route('/', methods=['GET', 'POST'])
