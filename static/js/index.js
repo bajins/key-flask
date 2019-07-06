@@ -93,8 +93,7 @@ function getKey() {
                     filename = patt.exec(contentDisposition)[1];
                 }
                 // 取文件名信息中的文件名,替换掉文件名中多余的符号
-                filename = replace(filename, "\\\\", "", true);
-                filename = replace(filename, "/", "", true);
+                filename = filename.replaceAll("\\\\|/|\"", "");
 
                 let downloadElement = document.createElement('a');
                 downloadElement.style.display = 'none';
